@@ -1,0 +1,12 @@
+Manuscript: Implementation of the fully retarded solutions for anisotropic cylinders in Gecko Hamaker 
+
+Methods:
+Give and explain (with math) the equations for Hamaker coefficients A0 and A2 in terms of the LDS, cylinder radius, angle, and separation. 
+
+Discussion (probably): (we intend to report only Hamaker coefficients explicitly) 
+How to calculate normal force and torque from these Hamaker coefficients 
+
+Provide citation papers:
+Papers that describe the importance of understanding these torques that we could cite for this
+
+
