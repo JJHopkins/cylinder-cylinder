@@ -43,11 +43,12 @@ coeff = 2.411e14 # in rad/s
 
 ns = np.arange(0.,500.)
 z = ns * coeff
-ls = np.linspace(1.0e-9, 1.0e-6, 10)
-dt = 2.0
-ts = np.arange(1.0,21.,dt)
-dh = 2.0
-hs = np.arange(1.01,21.01,dh)
+ls = np.linspace(1.0e-9, 1.0e-6, 200)
+#thetas = np.linspace((0.0001)*np.pi,(1./2)*np.pi,25)
+dt = 1.0
+ts = np.arange(1.0,201.,dt)
+dh = 1.0
+hs = np.arange(1.01,201.,dh)
 
 def Aiz(perp, par,med):
 	return (2.0*(perp-med)*med)/((perp+med)*(par-med))
@@ -57,43 +58,39 @@ def g0(a,eizw,L, N,yy,time):
 	term1 =	( time**(4.) * 2.0*(1. + 3.*a)*(1.+3.*a)     )
 	term2 = ( time**(2.) * 4.0*(1. + 2.*a+2.*a+3.0*a*a))
 	term3 = (          4.0*(1. + a)*(1. + a)         )
-	term4 = (-2.0 * yy * np.sqrt(eizw)* L * coeff * N / c * np.sqrt(time*time + 1.0))
-	#term4 = yy * np.sqrt(eizw) * L * N * (coeff/c) * np.sqrt(time*time + 1.0)	
-	term5 = (1./(np.sqrt(yy*yy - 1)))
-	print 'ys term0', term0
-	print 'ys term1', term1
-	print 'ys term2', term2
-	print 'ys term3', term3
-	#print 'ys term4', np.exp(term4)
+	#term4 = (-2.0 * yy * np.sqrt(eizw)* L * coeff * N / c * np.sqrt(time*time + 1.0))
+	term4 = yy * np.sqrt(eizw) * L * L * N * (coeff/c) * np.sqrt(time*time + 1.0)	#NOTE where the extra L comes from subst of y to y/l
+	#term5 = (1./(np.sqrt(yy*yy - 1)))
+	term5 = (1./(np.sqrt(yy*yy - 1.)))
+#	print 'ys term0', term0
+#	print 'ys term1', term1
+#	print 'ys term2', term2
+#	print 'ys term3', term3
 	print 'ys term4', np.exp(term4)
-	print 'ys term5', term5
-	print '----'
-	return (term0) * np.exp(term4)*( (term1) + (term2) + (term3)) * term5
+	print 'ys term4', term4
+#	print 'ys term5', term5
+	#print '----'
 	#return (term0) * np.exp(term4)*( (term1) + (term2) + (term3)) * term5
-	#return np.exp(term0 + term1 + term2 + term3) * term5 * np.exp(term4)  
-	#return np.exp(term0 + term1 + term2 + term3) * term5 * term4  
-	#return np.exp(term0 + term1 + term2 + term3) * term5 * ( 1.0 - 2.0*term4 + 2.0* term4*term4 - (4./3)*term4*term4*term4 + (2./3)*term4*term4*term4*term4)  
+	return term0 * (term1 + term2 + term3) * term5 * ( 1.0 - 2.0*term4 + 2.0* term4*term4 - (4./3)*term4*term4*term4 + (2./3)*term4*term4*term4*term4)  
 
 def g2(a,eizw, L, N, yy,time): 
 	term0 = (time    / np.sqrt(time*time+1.0)   ) 
 	term1 = ((1.- a)*(1.- a)*(time * time  + 2.0)*(time * time + 2.0))                     
-	term2 = (-2.0 * np.sqrt(eizw)* L * coeff * N / c * np.sqrt(time*time + 1.0))
-	term3 = (yy*yy - 1)**(-1./2)
+	term2 = yy * np.sqrt(eizw) * L * L * N * (coeff/c) * np.sqrt(time*time + 1.0)	
+	#term2 = (-2.0 * np.sqrt(eizw)* L * coeff * N / c * np.sqrt(time*time + 1.0))
+	term3 = (1./(np.sqrt(yy*yy - 1.)))
 	#term2 = (-2.0 * np.sqrt(eizw) * L * coeff * N * np.sqrt(time*time + 1.0) * (1./c)) 
 	#term2 = (np.exp(-2.0 * yy * np.sqrt(eizw)* L * N * (1./c) * np.sqrt(time*time + 1.0)))** (coeff) 
 	#term2 = yy * np.sqrt(eizw) * L * N * (coeff/c) * np.sqrt(time*time + 1.0)	
 	#term3 = (1./(np.sqrt(yy*yy - 1)))
-	print 'y_2s term0', term0
-	print 'y_2s term1', term1
-	#print 'y_2s term2', np.exp(term2)
-	print 'y_2s term2', np.exp(term2)
-	print 'y_2s term3', term3
-	print '----'
+#	print 'y_2s term0', term0
+#	print 'y_2s term1', term1
+#	#print 'y_2s term2', np.exp(term2)
+#	print 'y_2s term2', term2
+#	print 'y_2s term3', term3
+#	print '----'
 	#return term0 * term1* np.exp(term2) * term3
-	#return np.exp(term0 + term1) * term3 * np.exp(term2)  
-	#return np.exp(term0 + term1) * term3 * term2
-	return term0 * term1* np.exp(term2) * term3
-	#return np.exp(term0 + term1 ) * term3 * ( 1.0 - 2.0*term2 + 2.0* term2*term2 - (4./3)*term2*term2*term2 + (2./3)*term2*term2*term2*term2)  
+	return term0 * term1 * term3 * ( 1.0 - 2.0*term2 + 2.0* term2*term2 - (4./3)*term2*term2*term2 + (2./3)*term2*term2*term2*term2)  
 
 def As(eizz,eizw,L,N,Y): 
 	term1 = (((eizz-eizw)/eizw)*((eizz-eizw)/eizw))
@@ -101,7 +98,7 @@ def As(eizz,eizw,L,N,Y):
 	#term2 = np.exp(Y * eizw **(5./2) *((L**5) / (c**5)) * (coeff*N)**5 ) 
 	#term3 = (L**5) / (c**5)
 	#print 'As term1 = ', term1
-	print 'As term2 = ', term2
+#	print 'As term2 = ', term2
 	#print '----'
 	#return  np.log(term1 +  term2)# * term3
 	return  term1 *  term2# * term3
@@ -111,7 +108,7 @@ def A_2s(eizz,eizw, L , N ,Y):
 	term2 = (Y * ((np.sqrt(eizw))**(5.)) * (L**(5.)) * (coeff**(5.)) * (N**(5.)) / (c**(5.))) 
 	#term3 = (L**5) / (c**5)
 	#print 'A_2s term1 = ', term1
-	print 'A_2s term2 = ', term2
+#	print 'A_2s term2 = ', term2
 	#print '----'
 	#return np.exp(term1 + term2)# * term3
 	return term1 * term2# * term3
@@ -143,19 +140,19 @@ for k,length in enumerate(ls):
 		#print 'dt dh Integrand g2 = ',j, g2(aiz[j],eiz_w[j],length,n, H, T)
 
 		# Integral:
-		g0dt = g0(aiz[j],eiz_w[j],length,n, H, T)
-		G0dt = trapz(g0dt, x=ts, axis = 0)
+		g0dt = g0(aiz[j],eiz_w[j],length, n, H, T)
+		G0dt = trapz(g0dt, ts, axis = 0)
 		G0   = trapz(G0dt, hs)
 
 		g2dt = g2(aiz[j],eiz_w[j],length,n, H, T)
-		G2dt = trapz(g2dt, x = ts, axis = 0)#(aiz[j],eiz_w[j],length,n, H, T),T)
-		G2   = trapz(G2dt,hs)
+		G2dt = trapz(g2dt, ts, axis = 0)#(aiz[j],eiz_w[j],length,n, H, T),T)
+		G2   = trapz(G2dt, hs, axis = 0)
 
 		#print 'dt Integral G0 = ',j, G0
 		#print 'dt Integral G2 = ',j, G2
-		print '----'
+		#print '----'
 		#print 'N terms for A0 = '  , As(eiz_z[j],eiz_w[j],length,n,G0)
-		#print 'N terms for A2 = ', A_2s(eiz_z[j],eiz_w[j],length,n,y_2)
+		#print 'N terms for A2 = ', A_2s(eiz_z[j],eiz_w[j],length,n,G2)
 		#print '----'
 
 		A[j,k]   =   As(eiz_z[j],eiz_w[j],length,n,G0)
@@ -230,5 +227,6 @@ pl.grid(which = 'both')
 pl.tick_params(which = 'both',labelright = True)
 pl.savefig('plots/par_ret_water/140306_65w65_par_ret_g_vs_l.pdf')
 show()
+
 
 

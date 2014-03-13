@@ -167,8 +167,11 @@ pl.savefig('plots/skew_ret_water/140306_91w91_aiz.pdf' )
 show()
 
 pl.figure()
-pl.loglog(1e9*ls,(1e21*kb*Temp/32)*sum_A  ,'b-', label = r'$\mathcal{A^{(0)}}(\ell)$')
-pl.loglog(1e9*ls,(1e21*kb*Temp/32)*sum_A_2,'g-', label = r'$\mathcal{A^{(2)}}(\ell)$')
+pl.loglog(1.0e9*ls,(1.0e21/32)*sum_A  ,'b-', label = r'$\mathcal{A^{(0)}}(\ell)$')
+pl.loglog(1.0e9*ls,(1.0e21/32)*sum_A_2,'g-', label = r'$\mathcal{A^{(2)}}(\ell)$')
+
+#pl.loglog(1e9*ls,(1e21*kb*Temp/32)*sum_A  ,'b-', label = r'$\mathcal{A^{(0)}}(\ell)$')
+#pl.loglog(1e9*ls,(1e21*kb*Temp/32)*sum_A_2,'g-', label = r'$\mathcal{A^{(2)}}(\ell)$')
 
 pl.loglog(x90_A0, y90_A0,'k-' , label = r'$\mathcal{GH\,A^{(0)}}(\ell)$')
 pl.loglog(x90_A2, y90_A2,'k--', label = r'$\mathcal{GH\,A^{(2)}}(\ell)$')

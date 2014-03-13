@@ -28,7 +28,6 @@ coeff = 2.411e14 # in rad/s
 ns = np.arange(0.,500.)
 z = ns * coeff
 ls = np.linspace(1.0e-9, 1.0e-6, 200)
-#thetas = np.linspace((0.0001)*np.pi,(1./2)*np.pi,25)
 dt = 1.0
 ts = np.arange(1.0,201.,dt)
 dh = 1.0
@@ -44,7 +43,8 @@ def g0(a,eizw,L, N,yy,time):
 	term2 = ( time**2 * 4.0*(1. + 2.0*a+2.0*a+3.0*a*a))
 	term3 = (          4.0*(1. + a)*(1.0 + a)         )
 	term4 = (-2.0 * yy * np.sqrt(eizw)* L * coeff * N / c * np.sqrt(time*time + 1.0))
-	term5 = (yy*yy - 1)**(-1./2)
+	#term5 = (yy*yy - 1)**(-1./2)
+	term5 = (1./(np.sqrt(yy*yy - 1)))
 	return (term0) * np.exp(term4)*( (term1) + (term2) + (term3)) * term5
 
 def g2(a,eizw, L, N, yy,time): 
@@ -56,7 +56,7 @@ def g2(a,eizw, L, N, yy,time):
 
 def As(eizz,eizw,L,N,Y): 
 	term1 = (((eizz-eizw)/eizw)*((eizz-eizw)/eizw))
-	term2 = (Y * eizw **(5./2) * (coeff*N)**5 * L**5 / (c**5))
+	term2 = (Y *((np.sqrt(eizw))**(5.)) * (coeff*N)**5 * L**5 / (c**5))
 	return  term1 *  term2
 
 def A_2s(eizz,eizw, L , N ,Y):		
@@ -120,7 +120,6 @@ for k,length in enumerate(ls):
 	#sys.exit()
 for k,length in enumerate(ls):
 	EL[k] = 1./(length*length*length*length*length)
-	#G_l_t_dt[k] = (1.602e-19 / 4.11e-21) * (3.*np.pi/8) * EL[k]*r_1*r_1*r_2*r_2*(1./(12*np.pi))*(sum_A[k] + sum_A_2[k])
 	G_l_t_dt[k] = (1.602e-19 / 4.11e-21) * (1./32) * EL[k]*r_1*r_1*r_2*r_2*(1./(12*np.pi))*(sum_A[k] + sum_A_2[k])
 
 np.savetxt('g_prw.txt',G_l_t_dt)

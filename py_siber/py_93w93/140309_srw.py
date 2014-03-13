@@ -31,7 +31,7 @@ x90_A2, y90_A2 = np.loadtxt('data/93-W-93-PERPA2.PRN',unpack=True, usecols = [0,
 r_1 = 1.0e-9
 r_2 = 1.0e-9
 c = 2.99e8 # in m/s
-Temp = 297 
+Temp = 297. 
 kb  = 1.3807e-23 # in J/K
 coeff = 2.411e14 # in rad/s
 # NOTES:
