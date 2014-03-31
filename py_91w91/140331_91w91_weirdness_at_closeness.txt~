@@ -1,0 +1,23 @@
+In [6]: run 140331_SRW.py
+Computing A for separation number   0 of   9
+Computing A for separation number   1 of   9
+Computing A for separation number   2 of   9
+Computing A for separation number   3 of   9
+Computing A for separation number   4 of   9
+Computing A for separation number   5 of   9
+Computing A for separation number   6 of   9
+Computing A for separation number   7 of   9
+Computing A for separation number   8 of   9
+
+A0(separation) =  
+[  9.36290806e-20   9.38446467e-20   9.38304805e-20   9.38095785e-20   9.37826982e-20   9.37497289e-20   9.37106547e-20   9.36656443e-20   9.36150654e-20]
+A2(separation) =  
+[  1.54323360e-21   1.55429750e-21   1.55448151e-21   1.55468033e-21   1.55493226e-21   1.55523412e-21   1.55558293e-21   1.55597641e-21   1.55641313e-21]
+A0 n=0 term =  
+[  3.52056188e-22   3.52056188e-22   3.52056188e-22   3.52056188e-22   3.52056188e-22   3.52056188e-22   3.52056188e-22   3.52056188e-22   3.52056188e-22]
+A2 n=0 term =  
+[  8.20652667e-24   8.20652667e-24   8.20652667e-24   8.20652667e-24   8.20652667e-24   8.20652667e-24   8.20652667e-24   8.20652667e-24   8.20652667e-24]
+Ls = 
+[  1.00000000e-10,  2.00000000e-10,  3.00000000e-10,  4.00000000e-10,  5.00000000e-10,  6.00000000e-10,  7.00000000e-10,  8.00000000e-10,  9.00000000e-10]
+
+
